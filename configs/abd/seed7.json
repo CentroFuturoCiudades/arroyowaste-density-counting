@@ -1,0 +1,58 @@
+{
+  "run_name": "mcnn_abd_seed7",
+  "runs_dir": "runs/abd",
+  "dataset": {
+    "dataset_mode": "abd",
+    "root": "data/abd",
+    "split_manifest": "../../manifests/abd.csv",
+    "resize_mode": "none",
+    "out_stride": 4,
+    "sigma": 4.0,
+    "adaptive": true,
+    "beta": 0.3,
+    "k_neighbors": 3,
+    "sigma_min": 1.0,
+    "sigma_max": 12.0,
+    "density_cache": {
+      "mode": "require",
+      "root": "density_maps/adaptive_b03_k3_s40_clip10-120_stride4_native"
+    }
+  },
+  "model": {
+    "name": "mcnn",
+    "in_channels": 3,
+    "expansion": 3,
+    "final_activation": "softplus"
+  },
+  "loss": {
+    "density_scale": 100.0,
+    "lambda_count": 0.01,
+    "lambda_game": 0.5,
+    "game_levels": [
+      1,
+      2
+    ],
+    "game_level_weights": [
+      1.0,
+      1.0
+    ]
+  },
+  "train": {
+    "batch_size": 6,
+    "gradient_accumulation_steps": 2,
+    "val_batch_size": 1,
+    "epochs": 100,
+    "num_workers": 2,
+    "persistent_workers": true,
+    "pin_memory": true,
+    "prefetch_factor": 2,
+    "eval_every": 5,
+    "lr": 0.001,
+    "min_lr": 1e-05,
+    "weight_decay": 0.0001,
+    "seed": 7,
+    "deterministic": false,
+    "use_amp": true,
+    "data_order_seed": 20260812
+  }
+}
