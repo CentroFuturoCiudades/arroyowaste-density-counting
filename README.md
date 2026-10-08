@@ -13,10 +13,10 @@ conda activate geomcu
 
 ### ArroyoWaste
 
-Open the [ArroyoWaste data package](https://doi.org/10.6073/pasta/f29890eebef9b36bb128d5165cbdd433). From the list shown by the portal, download only:
+Open the [ArroyoWaste data package](https://doi.org/10.6073/pasta/f29890eebef9b36bb128d5165cbdd433) and download only:
 
-1. **ArroyoWaste v1.0 image collection** (entity 3).
-2. **ArroyoWaste v1.0 annotations** (entity 4).
+1. ArroyoWaste v1.0 image collection.
+2. ArroyoWaste v1.0 annotations.
 
 Extract both archives into `data/arroyowaste/`. The result must contain:
 
@@ -27,7 +27,6 @@ data/arroyowaste/
     └── points/
 ```
 
-Entities 1 and 2 are tables already represented by the frozen manifest in this repository. Entity 5 is not required because the density cache is generated below.
 
 Verify the files:
 
