@@ -109,6 +109,12 @@ python scripts/build_density_cache.py --dataset abd --manifest manifests/abd.csv
 
 Both commands use the frozen recipe `adaptive_b03_k3_s40_clip10-120_stride4_native`.
 
+## Model
+
+The model is a lightweight MCNN based on [MiCrowd](https://www.mdpi.com/1424-8220/23/7/3586). Four MobileNetV2-style branches process the image at different receptive-field scales and are combined to predict a density map. The implementation contains 85,057 trainable parameters.
+
+![MCNN architecture used in this repository](docs/mcnn-architecture.png)
+
 ## Train, evaluate, and visualize
 
 Choose one of the configurations under `configs/arroyowaste/` or `configs/abd/`.
@@ -126,11 +132,10 @@ python src/visualize.py \
   path/to/best_game2.pt
 ```
 
-The MCNN contains 85,057 trainable parameters. Frozen reference metrics are available in `results/`.
+Frozen reference metrics are available in `results/`.
 
 | Training data | MAE | NAE | nGAME(2) | Sinkhorn |
 |---|---:|---:|---:|---:|
 | ArroyoWaste | 52.54 ± 1.84 | 0.641 ± 0.022 | 0.886 ± 0.009 | 0.0947 ± 0.0022 |
 | ABD | 48.15 ± 1.36 | 0.588 ± 0.017 | 0.838 ± 0.014 | 0.0858 ± 0.0035 |
-
 
