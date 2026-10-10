@@ -27,7 +27,6 @@ data/arroyowaste/
     └── points/
 ```
 
-
 Verify the files:
 
 ```bash
@@ -40,24 +39,42 @@ The expected result is 414 samples and 23,235 points.
 
 ### ABD
 
-ABD adds 398 BePLi samples and 640 DWSD samples to ArroyoWaste.
+ABD adds 398 BePLi samples and 640 DSWD samples to ArroyoWaste.
 
-- [BePLi Dataset v1](https://doi.org/10.17882/92297): download `98753.zip`.
-- [DWSD](https://doi.org/10.17632/gr99ny6b8p.1): download `DSWD.zip` and use its 640-image training split.
+Download and extract:
 
-These official archives contain raw COCO annotations and segmentation masks. `build_abd.py` requires the corresponding prepared point annotations:
+- [BePLi Dataset v2](https://doi.org/10.17882/106157): `106157.tar.gz`.
+- [DSWD](https://doi.org/10.17632/gr99ny6b8p.1): `DSWD.zip`.
+
+Place the BePLi files so these paths exist:
 
 ```text
-data/sources/
-├── bepli/train_data/
-│   ├── images/        # 398 images
-│   └── annotations/   # 398 .npy point files
-└── dswd/train_data/
-    ├── images/        # 640 images
-    └── annotations/   # 640 .npy point files
+data/raw/bepli/plastic_coco/
+├── annotation/{train,val,test}.json
+└── images/original_images/
 ```
 
-The exact raw-to-point conversion is not included in this release. Therefore, ABD cannot yet be reconstructed from the two official raw downloads alone. Do not run the next command until the prepared source folders are available.
+Prepare BePLi using the frozen 398-image selection in the ABD manifest:
+
+```bash
+python scripts/prepare_bepli.py \
+  --images data/raw/bepli/plastic_coco/images/original_images \
+  --annotations data/raw/bepli/plastic_coco/annotation \
+  --output data/sources/bepli/train_data
+```
+
+For DSWD, use the 640-image training folders from the extracted ZIP. In the original layout they are `Train/Image` and `Train/Mask`:
+
+```bash
+python scripts/prepare_dswd.py \
+  --images data/raw/dswd/Train/Image \
+  --masks data/raw/dswd/Train/Mask \
+  --output data/sources/dswd/train_data
+```
+
+The BePLi script extracts one centroid per instance mask. The DSWD script extracts centroids from connected mask components of at least 20 pixels.
+
+Build and verify ABD:
 
 ```bash
 python scripts/build_abd.py

@@ -1,6 +1,7 @@
 numpy
 pandas
 opencv-python
+pycocotools
 matplotlib
 tqdm
 torch
