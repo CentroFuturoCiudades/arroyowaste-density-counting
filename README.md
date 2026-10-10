@@ -46,33 +46,51 @@ Download and extract:
 - [BePLi Dataset v2](https://www.seanoe.org/data/00858/96963/): `106157.tar.gz`.
 - [DSWD](https://doi.org/10.17632/gr99ny6b8p.1): `DSWD.zip`.
 
-Place the BePLi files so these paths exist:
+After extraction, arrange the required raw files as follows. An extra top-level folder created by an archive may be discarded.
 
 ```text
-data/raw/bepli/plastic_coco/
-├── annotation/{train,val,test}.json
-└── images/original_images/
+data/raw/
+├── bepli/
+│   └── plastic_coco/
+│       ├── annotation/
+│       │   ├── train.json
+│       │   ├── val.json
+│       │   └── test.json
+│       └── images/
+│           └── original_images/    # 3,722 .png images
+└── dswd/
+    └── Train/
+        ├── Image/                  # 640 img_*.png files
+        └── Mask/                   # 640 mask_*.png files
 ```
 
-Prepare BePLi using the frozen 398-image selection in the ABD manifest:
+For BePLi, use `original_images`, not the separate `images/train`, `images/val`, or `images/test` folders. For DSWD, only the `Train` split is used.
+
+Prepare both sources:
 
 ```bash
 python scripts/prepare_bepli.py \
   --images data/raw/bepli/plastic_coco/images/original_images \
   --annotations data/raw/bepli/plastic_coco/annotation \
   --output data/sources/bepli/train_data
-```
 
-For DSWD, use the 640-image training folders from the extracted ZIP. In the original layout they are `Train/Image` and `Train/Mask`:
-
-```bash
 python scripts/prepare_dswd.py \
   --images data/raw/dswd/Train/Image \
   --masks data/raw/dswd/Train/Mask \
   --output data/sources/dswd/train_data
 ```
 
-The BePLi script extracts one centroid per instance mask. The DSWD script extracts centroids from connected mask components of at least 20 pixels.
+The scripts create:
+
+```text
+data/sources/
+├── bepli/train_data/
+│   ├── images/         # 398 images
+│   └── annotations/    # 398 .npy files
+└── dswd/train_data/
+    ├── images/         # 640 images
+    └── annotations/    # 640 .npy files
+```
 
 Build and verify ABD:
 
