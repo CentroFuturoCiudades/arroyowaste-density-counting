@@ -14,9 +14,10 @@ import numpy as np
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO_ROOT))
+SRC_ROOT = REPO_ROOT / "src"
+sys.path.insert(0, str(SRC_ROOT))
 
-from src.data.density_map import make_density_map
+from data.density_map import make_density_map
 
 
 RECIPE_ID = (

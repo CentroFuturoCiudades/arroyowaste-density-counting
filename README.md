@@ -104,13 +104,8 @@ The expected result is 1,452 samples and 36,801 points.
 ## Density caches
 
 ```bash
-python scripts/build_density_cache.py \
-  --dataset arroyowaste \
-  --manifest manifests/arroyowaste.csv
-
-python scripts/build_density_cache.py \
-  --dataset abd \
-  --manifest manifests/abd.csv
+python scripts/build_density_cache.py --dataset arroyowaste --manifest manifests/arroyowaste.csv
+python scripts/build_density_cache.py --dataset abd --manifest manifests/abd.csv
 ```
 
 Both commands use the frozen recipe `adaptive_b03_k3_s40_clip10-120_stride4_native`.
