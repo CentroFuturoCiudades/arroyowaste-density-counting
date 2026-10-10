@@ -43,7 +43,7 @@ ABD adds 398 BePLi samples and 640 DSWD samples to ArroyoWaste.
 
 Download and extract:
 
-- [BePLi Dataset v2](https://doi.org/10.17882/106157): `106157.tar.gz`.
+- [BePLi Dataset v2](https://www.seanoe.org/data/00858/96963/): `106157.tar.gz`.
 - [DSWD](https://doi.org/10.17632/gr99ny6b8p.1): `DSWD.zip`.
 
 Place the BePLi files so these paths exist:
