@@ -64,7 +64,6 @@ data/raw/
         └── Mask/                   # 640 mask_*.png files
 ```
 
-For BePLi, use `original_images`, not the separate `images/train`, `images/val`, or `images/test` folders. For DSWD, only the `Train` split is used.
 
 Prepare both sources:
 
@@ -113,7 +112,7 @@ Both commands use the frozen recipe `adaptive_b03_k3_s40_clip10-120_stride4_nati
 ## Train, evaluate, and visualize
 
 Choose one of the configurations under `configs/arroyowaste/` or `configs/abd/`.
-The default batch size is 1 for 6 GB GPUs, with 12-step gradient accumulation. The reference metrics used batch size 6 with 2-step accumulation; restore those values for strict replication.
+The default batch size is 1 for small GPUs, with 12-step gradient accumulation. The reference metrics used batch size 6 with 2-step accumulation; restore those values for strict replication.
 
 ```bash
 python src/train.py configs/arroyowaste/seed7.json
@@ -134,4 +133,4 @@ The MCNN contains 85,057 trainable parameters. Frozen reference metrics are avai
 | ArroyoWaste | 52.54 ± 1.84 | 0.641 ± 0.022 | 0.886 ± 0.009 | 0.0947 ± 0.0022 |
 | ABD | 48.15 ± 1.36 | 0.588 ± 0.017 | 0.838 ± 0.014 | 0.0858 ± 0.0035 |
 
-The frozen ABD reconstruction previously matched all 1,452 image and point hashes. Its 1,452 generated density arrays also matched the experimental cache exactly, with maximum absolute difference 0.0.
+
