@@ -113,6 +113,7 @@ Both commands use the frozen recipe `adaptive_b03_k3_s40_clip10-120_stride4_nati
 ## Train, evaluate, and visualize
 
 Choose one of the configurations under `configs/arroyowaste/` or `configs/abd/`.
+The default batch size is 1 for 6 GB GPUs, with 12-step gradient accumulation. The reference metrics used batch size 6 with 2-step accumulation; restore those values for strict replication.
 
 ```bash
 python src/train.py configs/arroyowaste/seed7.json
