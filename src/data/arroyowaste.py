@@ -189,7 +189,7 @@ class ArroyoWasteDataset(Dataset):
 
         manifest_path = (
             self.density_cache_root
-            / "manifest.csv"
+            / "density_manifest.csv"
         )
 
         if not metadata_path.exists():
@@ -282,7 +282,7 @@ class ArroyoWasteDataset(Dataset):
             "adaptive":
                 self.adaptive,
 
-            "sigma_fallback":
+            "sigma":
                 self.sigma,
 
             "beta":
